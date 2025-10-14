@@ -1,5 +1,5 @@
 /*
- * *** YOUR NAME GOES HERE / YOUR SECTION NUMBER ***
+ * *** Jose Godinez-Contreras / 002 ***
  *
  * This hashMap object represents an over simplification of Java's implementation of HashMap within
  * Java's Collection Framework Library. You are to complete the following methods:
@@ -48,7 +48,7 @@
  *                                   mapped to the specified value
  *  boolean  remove(K, V)          - Removes the entry for the specified key only if it is currently
  *                                   mapped to the specified value.
- *  boolean  replace(K, V)         - Replaces the entry for the specified key only if it is currently
+ *  boolean  replace(K, V)          - Replaces the entry for the specified key only if it is currently
  *                                   mapped to some value
  *        V  replace(K, V1, V2)    - Replaces the entry for the specified key only if currently mapped
  *                                   to the specified value.
@@ -73,9 +73,9 @@
  ****************************************/
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.HashSet;
 
 
 /**
@@ -231,6 +231,24 @@ class myHashMap<K,V> {
          * return value is returned the invoking function based on the remove outcome.
          */
 
+        int index = getBucketIndex(key);
+        HashNode<K, V> head = bucket.get(index); // find where the key is located
+        HashNode<K, V> prev = null;
+
+        while (head != null) {
+        if (head.key.equals(key)) {
+            if (prev != null) {
+                prev.next = head.next;
+            } else {
+                bucket.set(index, head.next);
+            }
+
+            size--;
+            return head.value;
+        }
+        prev = head;
+        head = head.next;
+    }
         return null;
     }
 
