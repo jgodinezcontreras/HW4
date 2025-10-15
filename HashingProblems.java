@@ -1,5 +1,5 @@
 /*
- * *** YOUR NAME GOES HERE / YOUR SECTION NUMBER ***
+ * *** Jose Godinez-Contreras / 002 ***
  *
  * This HashingProblems object contains three methods / problems that you must
  * complete utilize the HashMap object within the Java's Collection Framework Library.
@@ -10,10 +10,9 @@
  *  - twoSums
  */
 
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
 
 class HashingProblems {
 
@@ -40,8 +39,18 @@ class HashingProblems {
          * returning 0.0 is NOT correct, as that is not the average value. Whereas
          * returning 0.0/0.0 IS correct (which would return a non-number).
          */
-
-         return 0.0 / 0.0;
+        double sum = 0;
+        int count = 0;
+        for (int key : array) {
+            if (map.containsKey(key)) {
+                sum += map.get(key);
+                count++;
+            }
+        }
+        if (count == 0) {
+            return 0.0 / 0.0;
+        }
+         return sum / count;
   }
 
 
@@ -61,7 +70,11 @@ class HashingProblems {
        *
        * Hint: Consider iterating over the HashMap using the keySet method.
        */
-
+        for (Integer key : map.keySet()) {
+            if (key % 2 != 0) {
+                result.add(map.get(key));
+            }
+        }
 
       return result;
   }
@@ -109,8 +122,19 @@ class HashingProblems {
       /*
        * ADD YOUR CODE HERE
        */
-
-      return -1;
+    HashSet<Integer> saw = new HashSet<>();
+    int count = 0;
+    for (int i = 0; i < numbers.length; i++) {
+        int num = numbers[i];
+        if (saw.contains(num-k)) {
+            count++;
+        }
+        if (saw.contains(num+k)) { //checks if the sum of the nums difference in K is in the set. 
+            count++;
+        }
+        saw.add(num); //adds the value thing to then go back through the loop and see if the sum is in the set
+    }
+      return count;//only worked if i changed -1 to count since count is the right answer
   }
 
 } /* end class HashingProblems */
